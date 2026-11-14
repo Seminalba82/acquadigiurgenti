@@ -66,7 +66,10 @@ h1.title .tm{font-size:.38em;vertical-align:top}
 @keyframes blink{50%{filter:brightness(1.35)}}
 .btn2{margin-top:1.4vh;font-family:'Press Start 2P',monospace;font-size:min(1.9vh,1.55vw);color:#fff;background:rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.4);border-radius:10px;padding:1vh 2vw;cursor:pointer;text-decoration:none;display:inline-block}
 .shareBtn{border-color:#69f0ae;color:#b9f6ca}
-.crossBtn{border-color:var(--gold);color:var(--gold);background:rgba(255,213,79,.08)}
+.crossBtn{display:block;box-sizing:border-box;max-width:min(88%,62vh);margin:1.4vh auto 0;padding:1vh 2vw;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(#d84a3a,#b8322a);border:2px solid #ffd54f;border-radius:12px;box-shadow:0 3px 0 #7d1f1a;cursor:pointer;line-height:1.5}
+.crossBtn:active{transform:translateY(2px);box-shadow:0 1px 0 #7d1f1a}
+.crossBtn b{display:block;font-weight:400;color:#ffd54f;font-size:min(1.8vh,1.45vw)}
+.crossBtn span{display:block;font-family:system-ui,Arial,sans-serif;font-weight:700;font-size:min(1.7vh,1.35vw);margin-top:.5vh;color:#fff}
 .topBox{margin-top:2vh;background:rgba(10,6,24,.75);border:2px solid #ffb300;border-radius:12px;padding:1.2vh 1.5vw;min-width:min(62vw,560px);max-width:94vw}
 .topBox h3{margin:0 0 .8vh;font-size:min(1.9vh,1.5vw);color:var(--gold);font-weight:400}
 .hs{display:grid;grid-template-columns:2.5em 1fr auto auto;gap:1.2vw;font-size:min(1.7vh,1.35vw);padding:.35vh 0;text-align:left;color:#fff}
@@ -92,7 +95,7 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
 .ver{opacity:.6}
 .srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 @media (orientation:portrait){
- .logoBox{flex-direction:column}.logoBox img{height:15dvh}h1.title{font-size:8.2vw;text-align:center}.sub{font-size:2.6vw}.disc{font-size:2.5vw;max-width:92vw;margin-left:auto;margin-right:auto}.start{font-size:3.8vw;padding:1.6dvh 6vw}.btn2{font-size:2.5vw;padding:1.2dvh 3vw}
+ .logoBox{flex-direction:column}.logoBox img{height:15dvh}h1.title{font-size:8.2vw;text-align:center}.sub{font-size:2.6vw}.disc{font-size:2.5vw;max-width:92vw;margin-left:auto;margin-right:auto}.start{font-size:3.8vw;padding:1.6dvh 6vw}.btn2{font-size:2.5vw;padding:1.2dvh 3vw}.crossBtn{max-width:92vw;padding:1.2dvh 3vw}.crossBtn b{font-size:2.6vw}.crossBtn span{font-size:2.5vw}
  .topBox{min-width:90vw}.topBox h3{font-size:2.8vw}.hs{font-size:2.4vw}.plays{font-size:2.3vw}.credits{font-size:2.8vw}
  .card{font-size:2.7vw;padding:2dvh 4vw}.lvTag{font-size:8vw}.lvName{font-size:3vw}.goTitle{font-size:15vw}.overScore{font-size:8vw}.brk{font-size:2.8vw}
 }
@@ -121,8 +124,8 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
     <div class="topBox"><h3 id="topTitle">🏆 LA TOP TEN DEL MESE</h3><div id="topList"></div></div>
     <div class="plays" id="plays"></div>
     <button class="btn2 shareBtn" onclick="AG.share(false)">📤 CONDIVIDI CON GLI AMICI</button>
-    <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener">🎮 PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.6</span></div>
+    <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener"><b>PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</b><span>La sala giochi di Alberto Seminerio: tutti i giochi gratis</span></a>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.7</span></div>
   </div>
 
   <div class="ov" id="ovName">
@@ -166,8 +169,8 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
     <button class="start" onclick="AG.askName()">🔁 RIPROVA</button>
     <button class="btn2" onclick="AG.title()">🏆 CLASSIFICA</button>
     <button class="btn2 shareBtn" onclick="AG.share(true)">📤 SFIDA GLI AMICI</button>
-    <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener">🎮 PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.6</span></div>
+    <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener"><b>PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</b><span>La sala giochi di Alberto Seminerio: tutti i giochi gratis</span></a>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.7</span></div>
   </div>
 </div>
 <div class="srOnly">
@@ -248,7 +251,7 @@ function scDrawLauncher(){}function scDrawRetroMic(){}
 <script>
 'use strict';
 /* ===================== L'ACQUA DI GIURGENTI™ ===================== */
-const AG_VERSION="v1.6", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
+const AG_VERSION="v1.7", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
 const FB_CFG={apiKey:"AIzaSyCHBGgiKfQUwrtlX_jFMoySt9yw1naf7AI",authDomain:"super-capone.firebaseapp.com",databaseURL:"https://super-capone-default-rtdb.europe-west1.firebasedatabase.app",projectId:"super-capone",storageBucket:"super-capone.firebasestorage.app",messagingSenderId:"234467270209",appId:"1:234467270209:web:b4ccb22824177d5f5e70c0"};
 const AG_MESI=["GENNAIO","FEBBRAIO","MARZO","APRILE","MAGGIO","GIUGNO","LUGLIO","AGOSTO","SETTEMBRE","OTTOBRE","NOVEMBRE","DICEMBRE"];
 const AG_RESET_T=Date.UTC(2026,10,13,23,0); // la classifica parte pulita dal 14 novembre 2026
