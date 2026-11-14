@@ -60,6 +60,7 @@ body.touch.playing #pad{display:flex}
 h1.title{margin:0;font-family:Bungee,Impact,sans-serif;font-weight:400;font-size:min(8.2vh,6.4vw);line-height:1;color:#ffe082;text-shadow:0 4px 0 #8a4b00,0 8px 22px rgba(0,0,0,.85);letter-spacing:.02em;text-align:left}
 h1.title .tm{font-size:.38em;vertical-align:top}
 .sub{font-size:min(1.9vh,1.45vw);line-height:1.7;color:var(--muted);margin-top:1.2vh}
+.disc{font-size:min(1.55vh,1.15vw);line-height:1.65;max-width:min(40vw,34em)}
 .start{margin-top:2.4vh;font-family:'Press Start 2P',monospace;font-size:min(3.2vh,2.7vw);color:#fff;background:linear-gradient(180deg,#ff5f6d,#c2185b);border:0;border-radius:14px;padding:1.6vh 3vw;box-shadow:0 6px 0 #6a0d33,0 10px 24px rgba(0,0,0,.5);cursor:pointer;animation:blink 1s steps(2,start) infinite}
 .start:active{transform:translateY(4px);box-shadow:0 2px 0 #6a0d33}
 @keyframes blink{50%{filter:brightness(1.35)}}
@@ -91,7 +92,7 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
 .ver{opacity:.6}
 .srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 @media (orientation:portrait){
- .logoBox{flex-direction:column}.logoBox img{height:15dvh}h1.title{font-size:8.2vw;text-align:center}.sub{font-size:2.6vw}.start{font-size:3.8vw;padding:1.6dvh 6vw}.btn2{font-size:2.5vw;padding:1.2dvh 3vw}
+ .logoBox{flex-direction:column}.logoBox img{height:15dvh}h1.title{font-size:8.2vw;text-align:center}.sub{font-size:2.6vw}.disc{font-size:2.5vw;max-width:92vw;margin-left:auto;margin-right:auto}.start{font-size:3.8vw;padding:1.6dvh 6vw}.btn2{font-size:2.5vw;padding:1.2dvh 3vw}
  .topBox{min-width:90vw}.topBox h3{font-size:2.8vw}.hs{font-size:2.4vw}.plays{font-size:2.3vw}.credits{font-size:2.8vw}
  .card{font-size:2.7vw;padding:2dvh 4vw}.lvTag{font-size:8vw}.lvName{font-size:3vw}.goTitle{font-size:15vw}.overScore{font-size:8vw}.brk{font-size:2.8vw}
 }
@@ -115,13 +116,13 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
   </div>
 
   <div class="ov" id="ovTitle">
-    <div class="logoBox"><img src="logo.webp" alt="Il Capone, il microfono vintage con cappello e baffi"><div><h1 class="title">L'ACQUA<br>DI GIURGENTI<span class="tm">™</span></h1><div class="sub" style="text-align:inherit">IL LADRO DELLA FONTANA BONAMURUNI<br>AGRIGENTO · DI NOTTE · ACQUA PROIBITA</div></div></div>
+    <div class="logoBox"><img src="logo.webp" alt="Il Capone, il microfono vintage con cappello e baffi"><div><h1 class="title">L'ACQUA<br>DI GIURGENTI<span class="tm">™</span></h1><div class="sub disc" style="text-align:inherit">I LUOGHI E I PERSONAGGI DI QUESTO GIOCO NON RISPECCHIANO LA REALTÀ MA SONO SOLO ISPIRAZIONE PER UNA STORIA DI FANTASIA... ANCHE L'ACQUA...</div></div></div>
     <button class="start" onclick="AG.askName()">▶ PREMI START</button>
     <div class="topBox"><h3 id="topTitle">🏆 LA TOP TEN DEL MESE</h3><div id="topList"></div></div>
     <div class="plays" id="plays"></div>
     <button class="btn2 shareBtn" onclick="AG.share(false)">📤 CONDIVIDI CON GLI AMICI</button>
     <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener">🎮 PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.5</span></div>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.6</span></div>
   </div>
 
   <div class="ov" id="ovName">
@@ -166,7 +167,7 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
     <button class="btn2" onclick="AG.title()">🏆 CLASSIFICA</button>
     <button class="btn2 shareBtn" onclick="AG.share(true)">📤 SFIDA GLI AMICI</button>
     <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener">🎮 PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.5</span></div>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.6</span></div>
   </div>
 </div>
 <div class="srOnly">
@@ -247,7 +248,7 @@ function scDrawLauncher(){}function scDrawRetroMic(){}
 <script>
 'use strict';
 /* ===================== L'ACQUA DI GIURGENTI™ ===================== */
-const AG_VERSION="v1.5", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
+const AG_VERSION="v1.6", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
 const FB_CFG={apiKey:"AIzaSyCHBGgiKfQUwrtlX_jFMoySt9yw1naf7AI",authDomain:"super-capone.firebaseapp.com",databaseURL:"https://super-capone-default-rtdb.europe-west1.firebasedatabase.app",projectId:"super-capone",storageBucket:"super-capone.firebasestorage.app",messagingSenderId:"234467270209",appId:"1:234467270209:web:b4ccb22824177d5f5e70c0"};
 const AG_MESI=["GENNAIO","FEBBRAIO","MARZO","APRILE","MAGGIO","GIUGNO","LUGLIO","AGOSTO","SETTEMBRE","OTTOBRE","NOVEMBRE","DICEMBRE"];
 const AG_RESET_T=Date.UTC(2026,10,13,23,0); // la classifica parte pulita dal 14 novembre 2026
