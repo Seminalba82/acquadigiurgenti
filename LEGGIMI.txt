@@ -1,0 +1,72 @@
+L'ACQUA DI GIURGENTI  v1.5
+==========================
+Gioco stealth notturno ad Agrigento. Il ladro d'acqua (Super Capone) deve riempire
+i bidoni alla fontana Bonamuruni senza farsi vedere dalla guardia (liv. 1) e dal faro
+della torretta (liv. 2).
+
+CONTENUTO
+- index.html  (gioco completo, file unico) + audio/, og.jpg, sitemap.xml
+- fonts/, icons/, logo.webp, favicon.ico, apple-touch-icon.png
+- vercel.json (cache per font e logo), robots.txt
+
+COMANDI
+- Tastiera: frecce / A D = muovi · SPAZIO o freccia giu = nasconditi/esci dal portone
+  · E o INVIO (tieni premuto) = riempi alla fontana · P = pausa
+- Touch: pulsanti ◀ ▶ NASCONDITI RIEMPI
+
+NOVITA' v1.5
+- Filmato: AGRIGENTO... / IL BENE PIU' PREZIOSO... / L'ACQUA! / fontana d'oro tenuta sotto chiave (cancello con lucchetto, poliziotti di guardia, faro che gira) / la gente in piazza: CAPONE AIUTACI TU! Si salta con un tocco o un tasto.
+- Sei livelli:
+  1. torcia corta (meta' raggio), passo lento            - 6 bidoni
+  2. torcia lunga, passo lento                           - 8 bidoni
+  3. torcia lunga, passo svelto                          - 10 bidoni
+  4. + faro della torretta, lento                        - 10 bidoni
+  5. faro veloce                                         - 12 bidoni
+  6. torcia corta e passo lento, ma con il CANE: se ti ha
+     davanti e sei allo scoperto abbaia e la guardia corre - 14 bidoni
+- Grafica a strati con profondita' (parallasse), buio dinamico: torcia e faro illuminano davvero
+  muri e personaggi, riflessi sul selciato bagnato, primo piano, particelle, zoom di camera.
+- Premio INVISIBILE: un viaggio senza farsi nemmeno intravedere vale un bonus che cresce in serie.
+- I valori dei livelli (velocita', raggio torcia, faro, bidoni) sono in cima al file, in LEVELS.
+
+REGOLE
+- Preso = -1 vita e perdi l'acqua che porti. Bidoni pieni = piu lento.
+- Punti: +200 a viaggio, premio INVISIBILE, bonus tempo + vite + livello.
+
+PUBBLICAZIONE su https://acquadigiurgenti.ilcaponequiz.win
+1. Crea un repo GitHub (es. acquadigiurgenti) e carica TUTTO il contenuto di questa cartella nella radice:
+   index.html, audio/, fonts/, icons/, og.jpg, sitemap.xml, robots.txt, vercel.json, ecc.
+2. Vercel: Add New > Project > importa il repo (framework "Other", nessuna build, nessuna output directory).
+3. Vercel > Settings > Domains > aggiungi acquadigiurgenti.ilcaponequiz.win
+4. Cloudflare > DNS di ilcaponequiz.win: CNAME  acquadigiurgenti  ->  cname.vercel-dns.com  (come gli altri giochi;
+   se Vercel indica un altro valore usa quello).
+5. Aggiungi le regole Firebase (vedi sotto) PRIMA di annunciarlo, altrimenti la classifica non scrive.
+6. Google Search Console (proprieta' di dominio ilcaponequiz.win): invia https://acquadigiurgenti.ilcaponequiz.win/sitemap.xml
+   e richiedi l'indicizzazione dell'URL.
+Gia' inclusi: link canonico, anteprima per WhatsApp/Facebook/X (og.jpg), dati strutturati per Google, sitemap, robots.
+Il pulsante "PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE" (schermata iniziale e fine partita) apre https://salagiochi.ilcaponequiz.win/
+NB: nome del percorso Firebase = acquagiurgenti (senza "di"), e' normale: non deve coincidere col dominio.
+
+CLASSIFICA MONDIALE (Firebase, progetto "super-capone")
+Percorso nuovo: arcade/acquagiurgenti  (top, plays, stats)
+DEVI aggiungere le regole al Realtime Database, copiando quelle di girgentiroads e
+cambiando il nome del nodo in "acquagiurgenti". Senza regole la classifica non scrive.
+Classifica mensile: top 10, azzeramento AG_RESET_T = 13/11/2026 23:00 UTC
+(costante in game.js/index.html, cerca AG_RESET_T).
+
+MODALITA' PROVA
+Apri index.html?prova  -> PIN "capone": scelta livello 1-6, filmato, vite infinite, punteggio non registrato.
+
+MUSICA DI SOTTOFONDO
+File: audio/musica.mp3 (in loop). Parte al primo tocco/tasto (i browser non permettono l'avvio automatico),
+con dissolvenza in entrata. Volume basso apposta, per lasciare spazio a effetti e voci:
+si regola con la costante MUSIC_VOL (0.16) in game.js/index.html. Tasto M o pulsante 🔊 = muto.
+In pausa la musica si abbassa ancora. Si ferma se la scheda va in secondo piano.
+
+SUONI (da aggiungere)
+Nel codice esiste la funzione vuota snd(nome): i punti dove agganciare l'audio sono gia
+marcati: cine, step, full, hide, spotted, bark, caught, deliver, levelDone.
+
+VERIFICA
+Tutti e 6 i livelli sono stati completati da un bot nel motore reale del gioco, con 3 vite su 3.
+Tempi del bot: liv.1 80s, liv.2 80s, liv.3 112s, liv.4 154s, liv.5 182s, liv.6 124s.
