@@ -125,7 +125,7 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
     <div class="plays" id="plays"></div>
     <button class="btn2 shareBtn" onclick="AG.share(false)">📤 CONDIVIDI CON GLI AMICI</button>
     <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener"><b>PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</b><span>La sala giochi di Alberto Seminerio: tutti i giochi gratis</span></a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.7</span></div>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.8</span></div>
   </div>
 
   <div class="ov" id="ovName">
@@ -170,7 +170,7 @@ input#nameIn{margin-top:2vh;font-family:'Press Start 2P',monospace;font-size:min
     <button class="btn2" onclick="AG.title()">🏆 CLASSIFICA</button>
     <button class="btn2 shareBtn" onclick="AG.share(true)">📤 SFIDA GLI AMICI</button>
     <a class="btn2 crossBtn" href="https://salagiochi.ilcaponequiz.win/" target="_blank" rel="noopener"><b>PROVA ANCHE GLI ALTRI GIOCHI DEL CAPONE</b><span>La sala giochi di Alberto Seminerio: tutti i giochi gratis</span></a>
-    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.7</span></div>
+    <div class="credits"><div class="promo">Vuoi il tuo gioco arcade personalizzato o vuoi scoprire altri giochi? Visita <a href="https://ilcaponequiz.win" target="_blank" rel="noopener">ilcaponequiz.win</a> o contatta <a href="https://albertoseminerio.com" target="_blank" rel="noopener">Alberto Seminerio</a></div>Gioco creato da <b>Alberto Seminerio</b> · di proprietà di <b>Il Capone Quiz<sup>™</sup></b> di Alberto Seminerio<span class="ver"> · v1.8</span></div>
   </div>
 </div>
 <div class="srOnly">
@@ -251,7 +251,7 @@ function scDrawLauncher(){}function scDrawRetroMic(){}
 <script>
 'use strict';
 /* ===================== L'ACQUA DI GIURGENTI™ ===================== */
-const AG_VERSION="v1.7", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
+const AG_VERSION="v1.8", AG_PATH="arcade/acquagiurgenti", AG_PIN="capone";
 const FB_CFG={apiKey:"AIzaSyCHBGgiKfQUwrtlX_jFMoySt9yw1naf7AI",authDomain:"super-capone.firebaseapp.com",databaseURL:"https://super-capone-default-rtdb.europe-west1.firebasedatabase.app",projectId:"super-capone",storageBucket:"super-capone.firebasestorage.app",messagingSenderId:"234467270209",appId:"1:234467270209:web:b4ccb22824177d5f5e70c0"};
 const AG_MESI=["GENNAIO","FEBBRAIO","MARZO","APRILE","MAGGIO","GIUGNO","LUGLIO","AGOSTO","SETTEMBRE","OTTOBRE","NOVEMBRE","DICEMBRE"];
 const AG_RESET_T=Date.UTC(2026,10,13,23,0); // la classifica parte pulita dal 14 novembre 2026
@@ -324,6 +324,80 @@ function musicBtn(){document.querySelectorAll('.muteBtn').forEach(b=>b.textConte
 document.addEventListener('visibilitychange',()=>{if(!MU.el)return;if(document.hidden){MU.el.pause()}else if(MU.on){const p=MU.el.play();if(p&&p.catch)p.catch(()=>{})}});
 document.addEventListener('keydown',e=>{if((e.key==='m'||e.key==='M')&&!(e.target&&e.target.tagName==='INPUT'))musicToggle()});
 window.addEventListener('load',musicBtn);
+
+/* ---------- DOPPIAGGIO E VERSI (voci del Capone, sirena, cane) ----------
+   Le voci passano su UN solo canale: mai due voci insieme, ognuna scorre fino alla fine.
+   Sirena e cane sono "di sfondo" e possono sentirsi sotto la voce.
+   Priorità: 5 caught/missione, 3 guardia/salvo, 2 nascosto, 1 passi. Una voce importante che arriva
+   mentre ne sta parlando un'altra aspetta il suo turno (max 4 s), le voci "da riempimento" si saltano. */
+const SFX_VOL=0.9, SFX_BG=0.55;
+const SFX_FILES={
+  mv:['v14_00','v14_13','v14_21','v16_49'],        // mentre cammina (si alternano)
+  hide:['v17_01','v16_55','v16_49'],               // quando si nasconde
+  caught:['v16_29','v16_20'],                      // quando viene scoperto
+  done:['v15_43'],                                 // tutti i bidoni portati
+  siren:['v15_26'],                                // faro lo illumina
+  dog:['v15_17'],                                  // cane
+  spot:['v15_10','v15_02'],                        // la guardia lo vede
+  saved:['v14_56']                                 // visto ma si nasconde in tempo
+};
+const SX={ctx:null,bufs:{},loading:false,cur:null,curPri:0,pend:null,rot:{},bgOn:{},moveT:3,hideT:0,dogT:8,spotted:false,prevEx:false,prevBark:false,prevLit:false};
+function sxInit(){
+  if(SX.ctx||SX.loading)return;
+  try{const AC=window.AudioContext||window.webkitAudioContext;SX.ctx=new AC()}catch(e){return}
+  SX.loading=true;
+  const all=[].concat(...Object.values(SFX_FILES));
+  [...new Set(all)].forEach(n=>{
+    fetch('audio/sfx/'+n+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,ko)=>SX.ctx.decodeAudioData(b,ok,ko))).then(buf=>{SX.bufs[n]=buf}).catch(()=>{});
+  });
+}
+function sxUnlock(){sxInit();try{if(SX.ctx&&SX.ctx.state==='suspended')SX.ctx.resume()}catch(e){}}
+['pointerdown','keydown','touchend'].forEach(ev=>document.addEventListener(ev,sxUnlock,{passive:true}));
+function sxPick(group){
+  const a=SFX_FILES[group];if(a.length===1)return a[0];
+  const last=SX.rot[group];let i;
+  do{i=(Math.random()*a.length)|0}while(a[i]===last);
+  return SX.rot[group]=a[i];
+}
+function sxPlay(name,vol){
+  const b=SX.bufs[name];if(!b||!SX.ctx||SX.ctx.state!=='running'||MU.muted)return null;
+  const s=SX.ctx.createBufferSource(),g=SX.ctx.createGain();s.buffer=b;g.gain.value=vol;s.connect(g);g.connect(SX.ctx.destination);s.start();return s;
+}
+function sxVoice(group,pri){
+  if(MU.muted||!SX.ctx)return;
+  if(SX.cur){
+    if(pri>=3){SX.pend={group,pri,t:4}}      // aspetta il suo turno
+    return;
+  }
+  const n=sxPick(group),s=sxPlay(n,SFX_VOL);if(!s)return;
+  SX.cur=s;SX.curPri=pri;s.onended=()=>{SX.cur=null;SX.curPri=0};
+}
+function sxBg(group,key){                      // sfondo: niente sovrapposizioni con se stesso
+  if(SX.bgOn[key])return;
+  const s=sxPlay(sxPick(group),SFX_BG);if(!s)return;
+  SX.bgOn[key]=true;s.onended=()=>{SX.bgOn[key]=false};
+}
+function sxReset(){SX.moveT=3;SX.hideT=0;SX.dogT=6+Math.random()*6;SX.spotted=false;SX.prevEx=false;SX.prevBark=false;SX.prevLit=false;SX.pend=null}
+function sxPend(dt){if(SX.pend){SX.pend.t-=dt;if(!SX.cur){const p=SX.pend;SX.pend=null;sxVoice(p.group,p.pri)}else if(SX.pend.t<=0)SX.pend=null}}
+/* chiamata ad ogni frame di gioco (stato 'play') */
+function sxTick(dt,L,ex,lit,bark){
+  // la guardia (o il faro) lo vede
+  if(ex&&!SX.prevEx&&G.meter<=0.05){SX.spotted=true;sxVoice('spot',3)}
+  if(lit&&!SX.prevLit)sxBg('siren','siren');
+  // visto, ma si è nascosto in tempo
+  if(!ex&&SX.prevEx&&G.hid&&SX.spotted){SX.spotted=false;sxVoice('saved',3)}
+  if(G.meter<=0)SX.spotted=false;
+  SX.prevEx=ex;SX.prevLit=lit;
+  // il cane: sempre quando lo vede, ogni tanto per conto suo
+  if(bark){if(!SX.prevBark||!SX.bgOn.dog)sxBg('dog','dog');SX.dogT=7+Math.random()*6}
+  else if(L.dog){SX.dogT-=dt;if(SX.dogT<=0){SX.dogT=8+Math.random()*7;sxBg('dog','dog')}}
+  SX.prevBark=bark;
+  // nascosto: una frase ogni tanto
+  if(G.hid){SX.hideT-=dt;if(SX.hideT<=0){SX.hideT=6;if(!ex)sxVoice('hide',2)}}else SX.hideT=0;
+  // in cammino: una frase ogni tot di strada, solo se non succede altro
+  const walking=!G.hid&&!G.filling&&(G.keys.l||G.keys.r)&&G.px>BASE_X;
+  if(walking){SX.moveT-=dt;if(SX.moveT<=0&&!SX.pend&&G.meter<=.05&&!bark){SX.moveT=4.5+Math.random()*2;if(!SX.cur)sxVoice('mv',1)}}
+}
 
 /* ---------- SCENA A STRATI: cielo, colle, tetti lontani, strada, primo piano (profondità con parallasse) ---------- */
 const LY={sky:null,far:null,mid:null,main:null};
@@ -918,7 +992,7 @@ function fx(dt){G.msgs.forEach(m=>m.t-=dt);G.msgs=G.msgs.filter(m=>m.t>0);partsS
 
 /* ---------- LOGICA DI GIOCO ---------- */
 function update(dt){
-  G.tAmb+=dt;fx(dt);
+  G.tAmb+=dt;fx(dt);sxPend(dt);
   const st=G.state;
   if(st!==MU.last){MU.last=st;if(MU.on)musicApply(.35)}
   if(st==='cine'){cineUpdate(dt);return}
@@ -954,6 +1028,7 @@ function update(dt){
   const ex=exposed(L,G.t,G.gt,G.px,G.hid,0)&&G.invT<=0;
   if(ex){if(G.meter<=0)snd('spotted');G.meter=Math.min(1.2,G.meter+dt/.45)}else G.meter=Math.max(0,G.meter-dt/.9);
   if(G.meter>.05)G.seenTrip=true;
+  sxTick(dt,L,ex,!!(L.light&&!G.hid&&G.px>BASE_X&&G.invT<=0&&lightSees(L.light,G.t,G.px,0)),bark);
   if(G.meter>=1)caught();
 }
 function hideToggle(){
@@ -972,18 +1047,18 @@ function deliver(){
   if(G.delivered>=L.target)levelDone();
 }
 function caught(){
-  G.state='caught';G.caughtT=1.7;G.flash=1;G.shake=1;G.hid=false;G.meter=1;G.streak=0;snd('caught');spawn('star',G.px,GY_T-1.6,14);
+  G.state='caught';G.caughtT=1.7;G.flash=1;G.shake=1;G.hid=false;G.meter=1;G.streak=0;snd('caught');SX.pend=null;sxVoice('caught',5);spawn('star',G.px,GY_T-1.6,14);
   if(!(G.dev&&G.devInf))G.lives--;
   if(G.carry==='full'||G.fill>0)msg('ACQUA PERSA!',G.px,5.2,'#9fd3ff',.36,1.6);
 }
 function respawn(){
-  G.state='play';G.px=2.0;G.face=1;G.carry='empty';G.fill=0;G.hid=false;G.meter=0;G.invT=1.4;G.filling=false;G.seenTrip=false;G.bark=false;
+  G.state='play';G.px=2.0;G.face=1;G.carry='empty';G.fill=0;G.hid=false;G.meter=0;G.invT=1.4;G.filling=false;G.seenTrip=false;G.bark=false;SX.spotted=false;SX.prevEx=false;SX.prevLit=false;SX.prevBark=false;
 }
 function levelDone(){
   const L=LEVELS[G.lvl];
   const timeB=Math.max(0,Math.round((L.par-G.t)))*10,liveB=G.lives*300,lvB=1000*G.lvl;
   G.bon={timeB,liveB,lvB,time:G.t};G.score+=timeB+liveB+lvB;
-  G.state='levelDone';G.doneT=1.3;G.hid=false;G.filling=false;G.meter=0;G.bark=false;snd('levelDone');spawn('gold',1.4,6,26);
+  G.state='levelDone';G.doneT=1.3;G.hid=false;G.filling=false;G.meter=0;G.bark=false;snd('levelDone');SX.pend=null;sxVoice('done',5);spawn('gold',1.4,6,26);
 }
 
 function fmtT(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
@@ -1014,7 +1089,7 @@ function startLevel(n){
   $('inTag').textContent='LIVELLO '+n;$('inName').textContent=LEVELS[n].name;$('inCard').innerHTML=INTRO[n];
   showOv('ovIntro');hud(true);
 }
-function begin(){if(G.state!=='intro')return;G.state='play';G.t=0;G.gt=0;showOv(null);hud(true)}
+function begin(){if(G.state!=='intro')return;sxReset();G.state='play';G.t=0;G.gt=0;showOv(null);hud(true)}
 
 function showLevelOverlay(){
   G.state='levelWait';const b=G.bon,L=LEVELS[G.lvl],last=!LEVELS[G.lvl+1];

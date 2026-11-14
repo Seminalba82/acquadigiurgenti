@@ -1,4 +1,4 @@
-L'ACQUA DI GIURGENTI  v1.5
+L'ACQUA DI GIURGENTI  v1.6
 ==========================
 Gioco stealth notturno ad Agrigento. Il ladro d'acqua (Super Capone) deve riempire
 i bidoni alla fontana Bonamuruni senza farsi vedere dalla guardia (liv. 1) e dal faro
@@ -14,7 +14,7 @@ COMANDI
   · E o INVIO (tieni premuto) = riempi alla fontana · P = pausa
 - Touch: pulsanti ◀ ▶ NASCONDITI RIEMPI
 
-NOVITA' v1.5
+NOVITA' v1.6
 - Filmato: AGRIGENTO... / IL BENE PIU' PREZIOSO... / L'ACQUA! / fontana d'oro tenuta sotto chiave (cancello con lucchetto, poliziotti di guardia, faro che gira) / la gente in piazza: CAPONE AIUTACI TU! Si salta con un tocco o un tasto.
 - Sei livelli:
   1. torcia corta (meta' raggio), passo lento            - 6 bidoni
@@ -70,3 +70,17 @@ marcati: cine, step, full, hide, spotted, bark, caught, deliver, levelDone.
 VERIFICA
 Tutti e 6 i livelli sono stati completati da un bot nel motore reale del gioco, con 3 vite su 3.
 Tempi del bot: liv.1 80s, liv.2 80s, liv.3 112s, liv.4 154s, liv.5 182s, liv.6 124s.
+
+=== v1.8 — DOPPIAGGIO ===
+Nuova cartella audio/sfx/ con le 14 voci (silenzio iniziale tagliato, il resto intero).
+Va caricata su GitHub insieme a index.html (cartella audio/sfx dentro audio).
+- Camminata: v14_00, v14_13, v14_21, v16_49 si alternano (una frase ogni 4-6 s di strada)
+- Nascosto: v17_01, v16_55, v16_49
+- Scoperto: v16_29, v16_20
+- Missione completata (livello): v15_43
+- Faro lo illumina: sirena v15_26 (di sfondo)
+- Cane: v15_17 (sempre quando lo vede, ogni tanto da solo; di sfondo)
+- La guardia lo vede: v15_10, v15_02
+- Visto ma si nasconde in tempo: v14_56
+Le voci non si sovrappongono mai: se ne arriva una importante mentre ne parla un'altra, aspetta il suo turno.
+Il pulsante audio (e il tasto M) silenzia anche le voci. Volumi in src/sfx.js: SFX_VOL, SFX_BG.

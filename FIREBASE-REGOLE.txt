@@ -1,0 +1,49 @@
+REGOLE FIREBASE PER "L'ACQUA DI GIURGENTI"
+Progetto: super-capone  ·  Realtime Database  ·  percorso: arcade/acquagiurgenti
+
+DOVE SI METTONO
+Console Firebase > progetto super-capone > Realtime Database > scheda "Regole".
+NON sostituire tutto: dentro il blocco "rules" > "arcade" trovi gia' "girgentiroads", "munnizza" ecc.
+Aggiungi questo blocco accanto a loro (attenzione alla virgola tra un blocco e l'altro), poi "Pubblica".
+
+BLOCCO DA AGGIUNGERE (dentro "arcade")
+
+      "acquagiurgenti": {
+        "top": {
+          ".read": true,
+          ".write": true,
+          ".validate": "newData.val() == null || newData.numChildren() <= 10",
+          "$i": {
+            ".validate": "newData.hasChildren(['n','s','w','t'])",
+            "n": { ".validate": "newData.isString() && newData.val().length <= 14" },
+            "s": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000" },
+            "w": { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 6" },
+            "t": { ".validate": "newData.isNumber()" },
+            "$altro": { ".validate": false }
+          }
+        },
+        "plays": {
+          ".read": false,
+          "$id": {
+            ".write": true,
+            ".validate": "newData.hasChildren(['n','t','v'])"
+          }
+        },
+        "stats": {
+          ".read": true,
+          "plays":  { ".write": true, ".validate": "newData.isNumber()" },
+          "visits": { ".write": true, ".validate": "newData.isNumber()" }
+        }
+      }
+
+COSA FA OGNI PARTE (e perche' serve)
+- top    : la top ten mensile. Il gioco legge e riscrive tutta la lista (max 10 voci: nome fino a 14 lettere,
+           punteggio, livello 1-6, data).
+- plays  : un registro di ogni partita iniziata (nome, data, versione, poi punteggio e fine). Il gioco solo scrive.
+- stats  : contatori "partite giocate" (mostrato sul titolo) e visite.
+
+COME VERIFICARE
+1. Pubblica le regole, apri il gioco (senza ?prova), gioca una partita e perdi di proposito.
+2. Realtime Database > scheda "Dati": deve comparire arcade > acquagiurgenti > top, plays, stats.
+3. Se il punteggio non compare, apri la scheda "Regole" e usa il "Simulatore" oppure controlla le virgole.
+   Se le regole di girgentiroads funzionano meglio, copia quel blocco e cambia solo il nome in "acquagiurgenti".
